@@ -1,12 +1,15 @@
 <script>
-    let showModal = true;
-    let isPromo = true;
+    export let message = "Default message";
+    export let showModal = false;
+    export let isPromo = false;
 </script>
 
 {#if showModal}
-    <div class="backdrop" class:promo={isPromo}>
+    <!-- The event handler of the modal is forwarded in the parent element.
+    The 'self' event modifier is also used -->
+    <div class="backdrop" class:promo={isPromo} on:click|self>
         <div class="modal">
-            <p>Sign up for offers!</p>
+            <p>{message}</p>
         </div>
     </div>
 {/if}

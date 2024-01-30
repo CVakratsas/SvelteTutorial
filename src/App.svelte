@@ -1,6 +1,12 @@
 <script>
 	import Modal from './Modal.svelte';
 
+	let showModal = false;
+
+	const toggleModal = () => {
+		showModal = !showModal;
+	}
+
 	let people = [
     { name: 'yoshi', beltColour: 'black', age: 25, id: 1 },
     { name: 'mario', beltColour: 'orange', age: 45, id: 2 },
@@ -10,14 +16,15 @@
   const handleClick = (id) => {
 	people = people.filter((person) => person.id != id)
   }
-
-  let num = 5;
 </script>
 
-<Modal />
-
+<!-- The modal has two props: The first is the message prop and the second is the showModal prop,
+which is a short notation of writing showModal={showModal} when the name is the same as the var passed -->
+<Modal message="I'm a modal" {showModal} on:click={toggleModal}/>
 
 <main>
+	<!-- 'once' event modifier is used -->
+	<button on:click|once={toggleModal}>Open modal</button>
 	{#each people as person (person.id)}
 		<div>
 			<h4>{person.name}</h4>
