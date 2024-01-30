@@ -1,5 +1,5 @@
 <script>
-    export let message = "Default message";
+
     export let showModal = false;
     export let isPromo = false;
 </script>
@@ -7,9 +7,9 @@
 {#if showModal}
     <!-- The event handler of the modal is forwarded in the parent element.
     The 'self' event modifier is also used -->
-    <div class="backdrop" class:promo={isPromo} on:click|self>
+    <div class="backdrop" class:promo={isPromo} on:click|self on:keypress={() => {}}>
         <div class="modal">
-            <p>{message}</p>
+            <slot></slot>
         </div>
     </div>
 {/if}

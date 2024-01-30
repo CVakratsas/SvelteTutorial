@@ -1,5 +1,6 @@
 <script>
 	import Modal from './Modal.svelte';
+	import AddPersonForm from './AddPersonForm.svelte';
 
 	let showModal = false;
 
@@ -20,7 +21,9 @@
 
 <!-- The modal has two props: The first is the message prop and the second is the showModal prop,
 which is a short notation of writing showModal={showModal} when the name is the same as the var passed -->
-<Modal message="I'm a modal" {showModal} on:click={toggleModal}/>
+<Modal {showModal} on:click={toggleModal}>
+	<AddPersonForm />
+</Modal>
 
 <main>
 	<!-- 'once' event modifier is used -->
