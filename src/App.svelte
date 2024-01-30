@@ -17,12 +17,19 @@
   const handleClick = (id) => {
 	people = people.filter((person) => person.id != id)
   }
+
+  const addPerson = (e) => {
+	const person = e.detail;
+	// ... is the unfold operator
+	people = [person, ...people];
+	showModal = false;
+  }
 </script>
 
 <!-- The modal has two props: The first is the message prop and the second is the showModal prop,
 which is a short notation of writing showModal={showModal} when the name is the same as the var passed -->
 <Modal {showModal} on:click={toggleModal}>
-	<AddPersonForm />
+	<AddPersonForm on:addPerson={addPerson} />
 </Modal>
 
 <main>
@@ -35,6 +42,13 @@ which is a short notation of writing showModal={showModal} when the name is the 
 				<p><strong>MASTER NINJA</strong></p>
 			{/if}
 			<p>{person.age} years old, {person.beltColour} belt</p>
+			{#if person.skills && person.skills.length > 0}
+				<ul>
+					{#each person.skills as skill (skill)}
+						<a href="#" style="text-decoration: none; color:black">{skill}</a> <br>
+					{/each}
+				</ul>
+			{/if}
 			<button on:click={() => handleClick(person.id)}>Delete</button>
 		</div>
 	{:else}
@@ -48,6 +62,7 @@ which is a short notation of writing showModal={showModal} when the name is the 
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
+		outline: 1px solid red;
 	}
 
 	h1 {
